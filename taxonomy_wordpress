@@ -1,0 +1,31 @@
+<?php 
+    // ACF Taxonomy
+    $terms = get_field('blog_category_tax');
+
+    
+?>
+
+    <?php foreach( $terms as $term ) { ?>
+        <div class="termWrapper">
+		<h1><a href="<?php echo esc_url( get_term_link( $term ) );?>"><?php echo get_cat_name( $term );?></a></h1>
+		<div class="featured_posts">
+			<?php 
+				$args = array(
+				  'numberposts' 	=> 3,
+					'category'      => $term
+				);
+				 
+				$latest_posts = get_posts( $args );
+
+                foreach ( $latest_posts as $post ) { ?>
+
+                <h2><?php echo $post->post_title;?></h2>
+                    <p><?php echo wp_trim_words($post->post_content, 20, '...');?></p>
+                    <a href="<?php echo the_permalink($post);?>">Read more</a>
+                    
+				<?php }
+			 ?>
+			
+		</div>
+	    </div>
+    <?php } ?>
