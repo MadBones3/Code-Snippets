@@ -1,0 +1,8 @@
+
+			global $post;
+			$terms = wp_get_post_terms( $post->ID, 'product_cat' );
+			foreach ( $terms as $term ) $categories[] = $term->slug;
+
+			if ( in_array( 'product-cat-slug', $categories ) ) { ?>
+				// code here
+			<?php }
