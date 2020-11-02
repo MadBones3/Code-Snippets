@@ -1,0 +1,42 @@
+<?php 
+
+$term = get_queried_object()->term_id;
+$termid = get_term($term, 'product_cat' );
+
+if($termid->parent > 0) 
+    { 
+        $args = array(
+            'orderby'       => 'name', 
+            'order'         => 'ASC',
+            'hide_empty'    => false, 
+            'child_of'      => $termid->parent,
+    ); 
+
+    $siblingproducts = get_terms( 'product_cat', $args);
+
+    foreach ($siblingproducts as $siblingproduct) { 
+         if ($siblingproduct->term_id == $term ) {  ?>
+            <li>
+    <?php } else { ?>    
+            <li>
+    <?php } ?>    
+
+        <a href="<?php echo get_term_link( $siblingproduct ); ?>"><?php echo $siblingproduct->name; ?><?php echo "<span class='count'>" .  $siblingproduct->count . "</span>"; ?></a></li>
+<?php }
+
+    } else { 
+        $args = array(
+            'orderby'       => 'name', 
+            'order'         => 'ASC',
+            'hide_empty'    => false, 
+            'child_of'      => $term 
+        ); 
+
+    $subproducts = get_terms( 'product_cat', $args);
+
+    foreach ($subproducts as $subproduct) { ?>
+        <li> <a href="<?php echo get_term_link( $subproduct ); ?>"><?php echo $subproduct->name; ?><?php echo "<span class='count'>" . $subproduct->count . "</span>"; ?></a></li>
+<?php }
+
+}
+?>
