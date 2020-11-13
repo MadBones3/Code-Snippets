@@ -1,0 +1,28 @@
+//decorland sale product cat
+// test if product cat parent has children, if so then show the banner {ACF} and products under that specific parent category.
+$term = get_queried_object();
+		
+		$children = get_terms( $term->taxonomy, array(
+		'parent'    => $term->term_id,
+		'hide_empty' => false,
+		'child_of' => $term->parent
+		) );
+		
+
+		if($children) { 
+			// term has children
+			foreach ( $children as $kid ) {
+				$term_link = $kid->term_id; //ID
+				$term_slug = $kid->slug; // Slug
+				$term_name = $kid->name;?>
+				
+				<div>
+					<a href="<?php echo get_category_link( $term_link ) ;?>">
+						<img src="<?php echo the_field('cat_test_banner', 'category_' . $term_link); ?>">
+						<?php echo $term_name; ?>
+					</a>
+				</div>
+				<?php
+				echo do_shortcode('[products columns="3" category="'.$term_name.'"]');
+			}
+		}
