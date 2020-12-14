@@ -1,0 +1,56 @@
+/* 
+* BC advent calander, each column has pointer events of none.
+* Get today's date and match it to the open date.
+*/
+
+var theDate = new Date();
+var todaysDate13 = '13';
+var todaysDate14 = '14';
+var todaysDate15 = '15';
+var todaysDate16 = '16';
+var todaysDate17 = '17';
+var todaysDate18 = '18';
+var todaysDate19 = '19';
+var todaysDate20 = '20';
+var todaysDate21 = '21';
+var todaysDate22 = '22';
+var todaysDate23 = '23';
+var todaysDate24 = '24';
+
+console.log(theDate);
+if( theDate.getDate() == todaysDate13) {
+	document.querySelector('.twelve').style.pointerEvents = "auto";
+}
+if(theDate.getDate() == todaysDate14) {
+	document.querySelector('.eleven').style.pointerEvents = "auto";
+}
+if(theDate.getDate() == todaysDate15) {
+	document.querySelector('.ten').style.pointerEvents = "auto";
+}
+if(theDate.getDate() == todaysDate16) {
+	document.querySelector('.nine').style.pointerEvents = "auto";
+}
+if(theDate.getDate() == todaysDate17) {
+	document.querySelector('.eight').style.pointerEvents = "auto";
+}
+if(theDate.getDate() == todaysDate18) {
+	document.querySelector('.seven').style.pointerEvents = "auto";
+}
+if(theDate.getDate() == todaysDate19) {
+	document.querySelector('.six').style.pointerEvents = "auto";
+}
+if(theDate.getDate() == todaysDate20) {
+	document.querySelector('.five').style.pointerEvents = "auto";
+}
+if(theDate.getDate() == todaysDate21) {
+	document.querySelector('.four').style.pointerEvents = "auto";
+}
+if(theDate.getDate() == todaysDate22) {
+	document.querySelector('.three').style.pointerEvents = "auto";
+}
+if(theDate.getDate() == todaysDate23) {
+	document.querySelector('.two').style.pointerEvents = "auto";
+}
+if(theDate.getDate() == todaysDate24) {
+	document.querySelector('.one').style.pointerEvents = "auto";
+}
