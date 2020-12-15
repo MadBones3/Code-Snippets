@@ -1,0 +1,12 @@
+/*
+* Js to allow mutiple toggle dropdowns in a navigation
+* ul.sub-menu is assigned dispaly: none
+* open-me is assigned display: block
+*/
+let navSub = document.querySelectorAll('#test-menu ul.sub-menu');
+    document.querySelectorAll('#test-menu li.menu-item-has-children').forEach((ar, index) => {
+      ar.addEventListener('click', event => {
+        console.log(event);
+        navSub[index].classList.toggle('open-me');
+      })
+    })
