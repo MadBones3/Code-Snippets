@@ -1,0 +1,26 @@
+// Add new tab of Delivery if in a specific category 	
+
+function woo_new_product_tab( $tabs ) {
+    if ( has_term( 'plant-subscriptions', 'product_cat' ) && is_product() ) {
+        // Adds the new tab
+        
+        $tabs['test_tab'] = array(
+            'title' 	=> __( 'Delivery', 'woocommerce' ),
+            'priority' 	=> 50,
+            'callback' 	=> 'woo_new_product_tab_content'
+        );
+    
+        return $tabs;
+    } else {
+        return $tabs;
+    }
+}
+function woo_new_product_tab_content() {
+    $delivery = get_field('delivery_content');
+    // The new tab content
+
+    echo '<h2>Delivery</h2>';
+    echo $delivery;
+    
+}
+add_filter( 'woocommerce_product_tabs', 'woo_new_product_tab' );
