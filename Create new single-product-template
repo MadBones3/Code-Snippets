@@ -1,0 +1,8 @@
+/* ===================================================================================== 
+If Product Category is SAMPLES display in the template single-product-samples
+======================================================================================== */
+if( has_term( 'samples', 'product_cat' ) ) {
+    wc_get_template_part( 'single-product-samples' ); 
+} else {
+  //else display the deault single-product.php
+}
