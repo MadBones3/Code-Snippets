@@ -1,8 +1,20 @@
 
-			global $post;
-			$terms = wp_get_post_terms( $post->ID, 'product_cat' );
-			foreach ( $terms as $term ) $categories[] = $term->slug;
+global $post;
+$terms = wp_get_post_terms( $post->ID, 'product_cat' );
+foreach ( $terms as $term ) $categories[] = $term->slug;
 
-			if ( in_array( 'product-cat-slug', $categories ) ) { ?>
-				// code here
-			<?php }
+if ( in_array( 'product-cat-slug', $categories ) ) { ?>
+	// code here
+<?php }
+
+=================================================================================================
+
+// ===== Remove the icons if in product category samples ======
+add_action( 'wp', 'remove_product_content', 23 );
+function remove_product_content() {
+	// If a product in the 'custom made blinds' category is being viewed…
+	if ( is_product() && has_term( 'samples', 'product_cat' ) ) {
+		//… Remove the icons
+		remove_action('woocommerce_single_product_summary', 'function_name', 23 );
+	}
+}
