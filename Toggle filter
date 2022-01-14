@@ -1,0 +1,37 @@
+function Shop_filter_tabs() {
+
+    const headingFilter = document.querySelectorAll('#topFilter')
+    const TheContent = document.querySelectorAll('#filterCont')
+    // reason for querySelectorAll, is duplicated the section, one for mobile and other desktop
+    const hideFilter = document.querySelectorAll('#hideFilter')
+
+    // Hide filter btn
+    hideFilter.forEach((tab, index) => {
+        tab.addEventListener('click', (e)=> {
+            e.preventDefault();
+            headingFilter.forEach((headTab)=> {
+                headTab.classList.toggle('hide-filters')
+            })
+            TheContent.forEach((contTab)=> {
+                contTab.classList.toggle('hide-filters')
+            })
+        })
+    })
+
+
+    // Toggle filter options
+    headingFilter.forEach((content, index)=> {
+
+        content.addEventListener('click', ()=> {
+            headingFilter[index].classList.toggle('active-filter-tab')
+            TheContent[index].classList.toggle('active-drop')
+        })
+
+    })
+
+}
+
+// Conditions to show on the correct pages
+if(document.querySelector('.archive.woocommerce-page')) {
+    Shop_filter_tabs();
+}
