@@ -1,0 +1,21 @@
+<?php
+// Get all the categories associated with the custom post type
+$categories = get_categories(array(
+    'taxonomy' => 'your_custom_taxonomy', // Replace with your custom taxonomy slug
+    'hide_empty' => false, // Set to true if you only want to retrieve non-empty categories
+));
+
+// Loop through the categories
+foreach ($categories as $category) {
+    // Get the category thumbnail (ACF image field)
+    $thumbnail = get_field('thumbnail', 'category_' . $category->term_id);
+
+    // Output category name and thumbnail
+    echo '<a href="' . get_category_link($category->term_id) . '">' . $category->name . '</a>';
+
+    // Output the category thumbnail image if available
+    if ($thumbnail) {
+        echo '<img src="' . $thumbnail['url'] . '" alt="' . $thumbnail['alt'] . '">';
+    }
+}
+?>
