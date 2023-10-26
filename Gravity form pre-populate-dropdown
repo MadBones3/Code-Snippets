@@ -1,0 +1,22 @@
+<?php
+
+if($header_buttons) { ?>
+    $btnCount = 1; ?>
+    <?php foreach($header_buttons as $btn) { ?>
+      <div class="form-btn select-change" data-val="<?php echo $btnCount++; ?>"><?php echo $btn['single_button']; ?></div>
+    <?php } ?>
+<?php } ?>
+
+/* ---------------------------------------------------------
+ *                     PRE-POPULATE DROPDOWN
+ * --------------------------------------------------------- */
+// Select btn
+// #input_2_7 is the dropdown id
+jQuery(".select-change").click(function () {
+  jQuery("#input_2_7").val(jQuery(this).data("val")).trigger("change")
+})
+
+Within forms you will have a dropdown and u will go within choices the tick show value too. 
+Apple : 1
+Orange : 2
+Lemon : 3
