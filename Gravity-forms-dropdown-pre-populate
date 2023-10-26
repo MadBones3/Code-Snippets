@@ -1,0 +1,49 @@
+/*
+* 3 pieces to add code to: 
+* 1) Functions.php - function lev_populate_locations( $form )
+* 2) _template-name_.php
+* 3) Js file
+ 
+*/
+
+1) 
+// Gravity forms pre-populate the dropdown list of the locations from the CPT
+add_filter( 'gform_pre_render_2', 'lev_populate_locations' );
+add_filter( 'gform_pre_validation_2', 'lev_populate_locations' );
+add_filter( 'gform_pre_submission_filter_2', 'lev_populate_locations' );
+add_filter( 'gform_admin_pre_render_2', 'lev_populate_locations' );
+function lev_populate_locations( $form ) {
+
+    foreach ( $form['fields'] as &$field ) {
+
+        if ( $field->type != 'select' || strpos( $field->cssClass, 'populate-locations' ) === false ) {
+            continue;
+        }
+
+        $posts = get_posts( 'numberposts=-1&post_status=publish&post_type=location&order=ASC&orderby=title' );
+
+        $choices = array();
+
+        foreach ( $posts as $post ) {
+            $choices[] = array( 'text' => $post->post_title, 'value' => $post->ID );
+        }
+
+        $field->placeholder = 'All locations';
+        $field->choices = $choices;
+
+    }
+
+    return $form;
+}
+
+2) echo '<div id="popupBtn" class="btn select-change" data-val='.get_the_ID().'><span>I want to go</span></div>';
+
+3) 
+/* ---------------------------------------------------------
+ *                     PRE-POPULATE DROPDOWN
+ * --------------------------------------------------------- */
+// Select btn
+// The #input_2_7 is the form dropdown ID
+jQuery(".select-change").click(function () {
+  jQuery("#input_2_7").val(jQuery(this).data("val")).trigger("change")
+})
