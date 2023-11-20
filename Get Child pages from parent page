@@ -1,0 +1,15 @@
+<?php 
+    // child links to parent page
+    $aboutID = 37;
+    if(is_page($aboutID)) {
+        echo '<section class="child-page-links">';
+            echo '<div class="wrapper">';
+                wp_list_pages( array(
+                    'child_of' => $aboutID,
+                    'title_li' => '',
+                    'sort_order' => 'ASC',
+                    'sort_column' => 'menu_order'
+                ));
+            echo '</div>';
+        echo '</section>';
+    }
