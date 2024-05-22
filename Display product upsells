@@ -1,0 +1,29 @@
+// Show addons / upsells 
+function display_upsell_products($product_id) {
+    $product = wc_get_product($product_id);
+    $upsell_ids = $product->get_upsell_ids();
+    $output = '<div class="upsell-products">';
+
+    foreach ($upsell_ids as $upsell_id) {
+        $upsell_product = wc_get_product($upsell_id);
+        if (!$upsell_product) {
+            continue;
+        }
+
+        $upsell_title = $upsell_product->get_title();
+        $upsell_price = $upsell_product->get_price_html();
+        $upsell_image = $upsell_product->get_image();
+        $upsell_add_to_cart_url = $upsell_product->add_to_cart_url();
+        $upsell_add_to_cart_text = $upsell_product->add_to_cart_text();
+
+        $output .= '<div class="upsell-product">';
+        $output .= '<div>' . $upsell_image . '</div>';
+        $output .= '<h2 style="color: var(--blue);">' . $upsell_title . '</h2>';
+        $output .= '<span class="price">' . $upsell_price . '</span>';
+        $output .= '<a href="' . $upsell_add_to_cart_url . '" class="button add_to_cart_button">' . $upsell_add_to_cart_text . '</a>';
+        $output .= '</div>';
+    }
+    $output .= '</div>';
+
+    return $output;
+}
